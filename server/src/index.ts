@@ -14,6 +14,7 @@ import { errorHandler, notFound, generalLimiter } from './middleware';
 import authRoutes from './routes/auth';
 import cropRoutes from './routes/crops';
 import recommendationRoutes from './routes/recommendations';
+import chatbotRoutes from './routes/chatbot';
 
 // Load environment variables
 dotenv.config();
