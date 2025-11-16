@@ -108,6 +108,19 @@ app.get('/api', (req, res) => {
         'POST /api/recommendations/feedback': 'Submit feedback',
         'GET /api/recommendations/popular': 'Get popular crops',
         'POST /api/recommendations/compare': 'Compare crops'
+      },
+      chatbot: {
+        'POST /api/chatbot/start': 'Start new chat session',
+        'POST /api/chatbot/message': 'Send message to chatbot',
+        'GET /api/chatbot/session/:sessionId': 'Get chat session history',
+        'PATCH /api/chatbot/session/:sessionId/feedback': 'Rate chat session',
+        'GET /api/chatbot/history': 'Get chat history'
+      },
+      plantDisease: {
+        'POST /api/plant-disease/detect': 'Detect plant disease from image',
+        'GET /api/plant-disease/models': 'Get available ML models',
+        'POST /api/plant-disease/train': 'Train custom model (admin only)',
+        'GET /api/plant-disease/disease/:disease': 'Get disease information'
       }
     }
   });
