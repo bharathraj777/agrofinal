@@ -75,6 +75,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/crops', cropRoutes);
 app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/plant-disease', plantDiseaseRoutes);
 
 // API documentation endpoint
 app.get('/api', (req, res) => {
