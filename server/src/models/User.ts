@@ -124,6 +124,8 @@ userSchema.methods.toJSON = function() {
   const userObject = this.toObject();
   delete userObject.passwordHash;
   delete userObject.refreshToken;
+  delete userObject.passwordResetToken;
+  delete userObject.passwordResetExpires;
   return userObject;
 };
 
