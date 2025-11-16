@@ -5,3 +5,4 @@ export { default as GovernmentScheme, IGovernmentScheme } from './GovernmentSche
 export { default as MarketplaceListing, IMarketplaceListing } from './MarketplaceListing';
 export { default as SupportTicket, ISupportTicket } from './SupportTicket';
 export { default as PriceData, IPriceData } from './PriceData';
+export { default as ChatBotSession, IChatBotSession } from './ChatBotSession';
