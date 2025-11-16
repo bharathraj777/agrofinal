@@ -17,6 +17,8 @@ export interface IUser extends Document {
   isActive: boolean;
   lastLogin?: Date;
   refreshToken?: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
