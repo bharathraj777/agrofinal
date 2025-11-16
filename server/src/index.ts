@@ -73,6 +73,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/crops', cropRoutes);
 app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // API documentation endpoint
 app.get('/api', (req, res) => {
