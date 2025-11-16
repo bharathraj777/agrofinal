@@ -278,6 +278,9 @@ const Layout: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* ChatBot - Only show for authenticated users */}
+      {isAuthenticated && <ChatBot />}
     </div>
   );
 };
