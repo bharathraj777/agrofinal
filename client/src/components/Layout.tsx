@@ -200,6 +200,12 @@ const Layout: React.FC = () => {
                   Recommendations
                 </Link>
                 <Link
+                  to="/farmer/plant-disease"
+                  className="nav-link block"
+                >
+                  Disease Detection
+                </Link>
+                <Link
                   to="/farmer/marketplace"
                   className="nav-link block"
                 >
