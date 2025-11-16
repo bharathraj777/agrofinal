@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
+import ChatBot from './ChatBot';
 
 const Layout: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
