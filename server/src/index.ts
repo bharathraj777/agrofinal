@@ -15,6 +15,7 @@ import authRoutes from './routes/auth';
 import cropRoutes from './routes/crops';
 import recommendationRoutes from './routes/recommendations';
 import chatbotRoutes from './routes/chatbot';
+import plantDiseaseRoutes from './routes/plantDisease';
 
 // Load environment variables
 dotenv.config();
