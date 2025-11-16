@@ -1,0 +1,233 @@
+/* Custom global styles */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Loading animation */
+.loading-dots {
+  @apply inline-flex space-x-1;
+}
+
+.loading-dots span {
+  @apply w-2 h-2 bg-primary-500 rounded-full;
+  animation: loading-dots 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes loading-dots {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Map container */
+.map-container {
+  @apply w-full h-96 rounded-lg overflow-hidden border border-gray-200;
+}
+
+/* Image gallery */
+.image-gallery {
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+}
+
+.image-gallery img {
+  @apply w-full h-48 object-cover rounded-lg cursor-pointer transition-transform hover:scale-105;
+}
+
+/* Form validation styles */
+.form-error {
+  @apply text-red-500 text-sm mt-1;
+}
+
+.form-success {
+  @apply text-green-500 text-sm mt-1;
+}
+
+/* Skeleton loading */
+.skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+.skeleton-text {
+  @apply skeleton h-4 mb-2;
+}
+
+.skeleton-text:last-child {
+  @apply mb-0;
+}
+
+.skeleton-card {
+  @apply skeleton h-48 w-full;
+}
+
+/* Feature highlight boxes */
+.feature-box {
+  @apply p-6 rounded-lg border border-gray-200 hover:border-primary-300 transition-colors duration-200;
+}
+
+.feature-box-icon {
+  @apply w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4;
+}
+
+/* Crop recommendation result cards */
+.recommendation-card {
+  @apply bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200;
+}
+
+.recommendation-card.high-confidence {
+  @apply border-green-200 bg-green-50;
+}
+
+.recommendation-card.medium-confidence {
+  @apply border-yellow-200 bg-yellow-50;
+}
+
+.recommendation-card.low-confidence {
+  @apply border-red-200 bg-red-50;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply text-gray-600 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+}
+
+.nav-link.active {
+  @apply text-primary-600 bg-primary-50;
+}
+
+/* Mobile navigation */
+.mobile-menu {
+  @apply md:hidden;
+}
+
+.mobile-menu.open {
+  @apply block;
+}
+
+/* Chart container */
+.chart-container {
+  @apply bg-white p-4 rounded-lg shadow;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply inline-block w-6 h-6 border-2 border-gray-300 border-t-primary-600 rounded-full animate-spin;
+}
+
+/* Success checkmark */
+.success-checkmark {
+  @apply inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full;
+}
+
+/* Error indicator */
+.error-indicator {
+  @apply inline-flex items-center justify-center w-6 h-6 bg-red-500 text-white rounded-full;
+}
+
+/* Weather display */
+.weather-widget {
+  @apply bg-gradient-to-br from-blue-400 to-blue-600 text-white p-4 rounded-lg;
+}
+
+/* Government scheme card */
+.scheme-card {
+  @apply bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow duration-200;
+}
+
+.scheme-card.urgent {
+  @apply border-red-200 bg-red-50;
+}
+
+/* Marketplace listing */
+.listing-card {
+  @apply bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200;
+}
+
+.listing-status {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.listing-status.approved {
+  @apply bg-green-100 text-green-800;
+}
+
+.listing-status.pending {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.listing-status.rejected {
+  @apply bg-red-100 text-red-800;
+}
+
+.listing-status.sold {
+  @apply bg-blue-100 text-blue-800;
+}
+
+/* Support ticket */
+.ticket-card {
+  @apply bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow duration-200;
+}
+
+.ticket-priority {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.ticket-priority.urgent {
+  @apply bg-red-100 text-red-800;
+}
+
+.ticket-priority.high {
+  @apply bg-orange-100 text-orange-800;
+}
+
+.ticket-priority.medium {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.ticket-priority.low {
+  @apply bg-gray-100 text-gray-800;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break-before {
+    page-break-before: always;
+  }
+
+  .print-break-after {
+    page-break-after: always;
+  }
+
+  .print-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}
