@@ -194,15 +194,30 @@ const PlantDiseasePage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Plant Disease Detection</h1>
-        <p className="text-lg text-gray-600">
-          Upload an image of your plant to detect diseases and get treatment recommendations using our AI-powered system.
-        </p>
+    return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+      {/* Background Pattern */}
+      <div className="fixed inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
       </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex justify-center items-center mb-4">
+            <div className="p-4 bg-blue-100 rounded-2xl">
+              <Microscope className="w-12 h-12 text-blue-600" />
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+            AI Plant Disease Detection
+          </h1>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Upload images of your plants for instant disease detection and treatment recommendations powered by advanced AI
+          </p>
+        </div>
 
       {/* Model Selection */}
       {availableModels.length > 0 && (
