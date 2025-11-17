@@ -478,24 +478,175 @@ const PlantDiseasePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Camera Access */}
-      <div className="mt-8 bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Access</h3>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="btn-outline flex items-center justify-center"
-          >
-            <Camera className="w-4 h-4 mr-2" />
-            Use Camera
-          </button>
-          <button
-            onClick={() => window.open('/farmer/recommendations', '_blank')}
-            className="btn-outline flex items-center justify-center"
-          >
-            <Brain className="w-4 h-4 mr-2" />
-            Crop Recommendations
-          </button>
+                {/* Prediction Results */}
+          {prediction && (
+            <div className="col-span-full">
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-orange-50">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-2xl font-bold text-gray-900 flex items-center">
+                      <Microscope className="w-6 h-6 mr-3 text-red-600" />
+                      Disease Analysis Results
+                    </h3>
+                    <div className="flex items-center space-x-3">
+                      <button className="p-2 bg-white/80 backdrop-blur-sm rounded-lg hover:bg-white transition-colors">
+                        <Download className="w-4 h-4 text-gray-600" />
+                      </button>
+                      <button className="p-2 bg-white/80 backdrop-blur-sm rounded-lg hover:bg-white transition-colors">
+                        <Share2 className="w-4 h-4 text-gray-600" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-6">
+                  {/* Disease Info */}
+                  <div className="bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className={`p-4 rounded-xl ${getSeverityColor(prediction.severity)} bg-opacity-20`}>
+                          {getSeverityIcon(prediction.severity)}
+                        </div>
+                        <div>
+                          <h4 className="text-2xl font-bold text-gray-900">{prediction.disease}</h4>
+                          <p className="text-sm text-gray-600 mt-1">Detected Disease</p>
+                        </div>
+                      </div>
+                      <span className={`px-4 py-2 text-lg font-bold rounded-full ${getSeverityColor(prediction.severity)}`}>
+                        {prediction.severity.toUpperCase()}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">AI Confidence</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-24 bg-gray-200 rounded-full h-3">
+                              <div
+                                className={`h-3 rounded-full ${
+                                  prediction.confidence >= 0.9 ? 'bg-green-500' :
+                                  prediction.confidence >= 0.7 ? 'bg-yellow-500' :
+                                  prediction.confidence >= 0.5 ? 'bg-orange-500' : 'bg-red-500'
+                                }`}
+                                style={{ width: `${prediction.confidence * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className={`font-bold text-sm ${getConfidenceColor(prediction.confidence)}`}>
+                              {(prediction.confidence * 100).toFixed(1)}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="p-2 bg-blue-100 rounded-lg">
+                            <Shield className="w-4 h-4 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="text-xs text-blue-700">Treatment Urgency</p>
+                            <p className="text-sm font-bold text-blue-900">
+                              {prediction.severity === 'critical' ? 'Immediate' :
+                               prediction.severity === 'high' ? 'Within 24hrs' :
+                               prediction.severity === 'medium' ? 'Within 3 days' : 'Monitor'}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Recommendations */}
+                  {prediction.recommendations.length > 0 && (
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <CheckCircle className="w-5 h-5 mr-2 text-green-600" />
+                        Immediate Actions
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {prediction.recommendations.map((rec, index) => (
+                          <div key={index} className="bg-green-50 border border-green-200 rounded-xl p-4 hover:bg-green-100 transition-colors">
+                            <div className="flex items-start">
+                              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <span className="text-white text-xs font-bold">{index + 1}</span>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-green-900">{rec}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Treatment Options */}
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                      <Heart className="w-5 h-5 mr-2 text-red-600" />
+                      Treatment Solutions
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <h5 className="font-semibold text-green-800 mb-3 flex items-center bg-green-50 px-3 py-2 rounded-lg">
+                          <Leaf className="w-4 h-4 mr-2" />
+                          Organic Methods
+                        </h5>
+                        <div className="space-y-3">
+                          {prediction.treatments.organic.map((treatment, index) => (
+                            <div key={index} className="bg-white border border-green-200 rounded-lg p-3 hover:shadow-md transition-shadow">
+                              <div className="flex items-start">
+                                <div className="w-2 h-2 bg-green-500 rounded-full mr-3 mt-1.5"></div>
+                                <span className="text-sm text-gray-700">{treatment}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <h5 className="font-semibold text-blue-800 mb-3 flex items-center bg-blue-50 px-3 py-2 rounded-lg">
+                          <Droplets className="w-4 h-4 mr-2" />
+                          Chemical Methods
+                        </h5>
+                        <div className="space-y-3">
+                          {prediction.treatments.chemical.map((treatment, index) => (
+                            <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 hover:shadow-md transition-shadow">
+                              <div className="flex items-start">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 mt-1.5"></div>
+                                <span className="text-sm text-gray-700">{treatment}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Prevention Tips */}
+                  {prediction.prevention.length > 0 && (
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <Shield className="w-5 h-5 mr-2 text-purple-600" />
+                        Prevention Strategies
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {prediction.prevention.map((tip, index) => (
+                          <div key={index} className="bg-purple-50 border border-purple-200 rounded-xl p-4 hover:bg-purple-100 transition-colors">
+                            <div className="flex items-start">
+                              <div className="p-2 bg-purple-200 rounded-lg mr-3">
+                                <Info className="w-4 h-4 text-purple-700" />
+                              </div>
+                              <span className="text-sm text-gray-700">{tip}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
