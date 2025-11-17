@@ -199,21 +199,186 @@ RATE_LIMIT_WINDOW_MS=900000 # 15 minutes
 RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-### Required API Keys
+### 🆓 FREE API Keys Setup (All Services Have Free Tiers)
 
-For full functionality, obtain these API keys:
+This application is designed to work with completely FREE API services. Here's how to set up each one:
 
-1. **Google Maps JavaScript API**
-   - Enable: Maps JavaScript API, Geocoding API, Places API
-   - Add key to `.env` as `GOOGLE_MAPS_API_KEY`
+## 1. Weather Data - OpenWeatherMap (1000 calls/day FREE)
 
-2. **OpenWeatherMap API**
-   - Sign up at openweathermap.org/api
-   - Add key to `.env` as `OPENWEATHER_API_KEY`
+**Setup Steps:**
+1. Go to [OpenWeatherMap](https://openweathermap.org/api)
+2. Click "Sign Up" and create a free account
+3. After email verification, go to "API keys" tab
+4. Copy your default API key (or create a new one)
+5. Add to your `.env` file:
+   ```bash
+   OPENWEATHER_API_KEY=your_api_key_here
+   ```
 
-3. **Email Service (Optional)**
-   - SendGrid or SMTP configuration
-   - Add credentials to `.env`
+**Free Tier Benefits:**
+- 1,000 API calls per day (more than enough for development)
+- Current weather data
+- 5-day weather forecast
+- No credit card required
+
+## 2. Maps & Geocoding - Multiple FREE Options
+
+### Option A: OpenCage Geocoder (2,500 calls/day FREE) - Recommended
+**Setup Steps:**
+1. Go to [OpenCage](https://opencagedata.com/api)
+2. Sign up for free plan
+3. Get API key from dashboard
+4. Add to your `.env` file:
+   ```bash
+   OPENCAGE_API_KEY=your_opencage_key_here
+   MAP_PROVIDER=opencage
+   ```
+
+### Option B: OpenStreetMap + Nominatim (Completely FREE) - No API Key Required!
+**Setup:**
+```bash
+MAP_PROVIDER=leaflet
+```
+- Works out of the box with no registration
+- Unlimited usage
+- Perfect for development
+
+## 3. Email Service - Choose One FREE Option
+
+### Option A: EmailJS (200 emails/month FREE) - Easiest Setup
+**Setup Steps:**
+1. Go to [EmailJS](https://www.emailjs.com/)
+2. Sign up for free account
+3. Create an email service (use Gmail or other)
+4. Create an email template
+5. Add to your `.env` file:
+   ```bash
+   EMAILJS_PUBLIC_KEY=your_public_key
+   EMAILJS_SERVICE_ID=your_service_id
+   EMAILJS_TEMPLATE_ID=your_template_id
+   ```
+
+### Option B: SendGrid (100 emails/day FREE)
+**Setup Steps:**
+1. Go to [SendGrid](https://sendgrid.com/)
+2. Sign up for free account
+3. Verify your sender identity
+4. Generate API key
+5. Add to your `.env` file:
+   ```bash
+   SENDGRID_API_KEY=your_sendgrid_api_key
+   ```
+
+### Option C: Gmail SMTP (FREE)
+**Setup Steps:**
+1. Enable 2-factor authentication on your Gmail account
+2. Generate an App Password:
+   - Go to Google Account settings
+   - Security → 2-Step Verification → App passwords
+   - Generate new app password for "Mail"
+3. Add to your `.env` file:
+   ```bash
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=your_email@gmail.com
+   SMTP_PASS=your_app_password_here
+   ```
+
+## 4. Market Price Data - Agmarknet (FREE Government Data)
+**No setup required!** Uses free Indian government agricultural price data.
+
+## 5. Maps Visualization - Leaflet + OpenStreetMap (Completely FREE)
+**No API key needed!** Uses open-source mapping tiles.
+
+## Quick Setup Example
+
+Complete `.env` file with FREE services:
+
+```bash
+# Database
+MONGODB_URI=mongodb://localhost:27017/agriculture_db
+
+# JWT Configuration
+JWT_SECRET=your-super-secret-jwt-key-min-32-characters
+JWT_REFRESH_SECRET=your-refresh-secret-key-min-32-characters
+
+# FREE API Keys
+OPENWEATHER_API_KEY=your_openweather_key
+OPENCAGE_API_KEY=your_opencage_key
+MAP_PROVIDER=leaflet
+
+# Email (choose one option)
+EMAILJS_PUBLIC_KEY=your_emailjs_key
+EMAILJS_SERVICE_ID=your_emailjs_service
+EMAILJS_TEMPLATE_ID=your_emailjs_template
+
+# Application Settings
+NODE_ENV=development
+PORT=5000
+CLIENT_URL=http://localhost:3000
+```
+
+## Cost Summary (All FREE!)
+
+| Service | Cost | Daily Limit | Monthly Limit |
+|---------|------|-------------|--------------|
+| OpenWeatherMap | FREE | 1,000 calls | ~30,000 calls |
+| OpenCage Geocoder | FREE | 2,500 calls | ~75,000 calls |
+| OpenStreetMap | FREE | Unlimited | Unlimited |
+| EmailJS | FREE | ~7 calls/day | 200 emails/month |
+| SendGrid | FREE | 100 calls/day | 3,000 emails/month |
+| Agmarknet | FREE | Unlimited | Unlimited |
+| Leaflet Maps | FREE | Unlimited | Unlimited |
+
+**Total Cost: $0/month!** 🎉
+
+## Getting API Keys - Step by Step
+
+### 1. OpenWeatherMap API (2 minutes)
+```bash
+# Visit: https://openweathermap.org/api
+# 1. Click "Get Free API Key"
+# 2. Fill out the form
+# 3. Check your email for the API key
+# 4. Copy key to .env file
+```
+
+### 2. OpenCage Geocoder (3 minutes)
+```bash
+# Visit: https://opencagedata.com/api#quickstart
+# 1. Click "Get API Key"
+# 2. Fill out the free registration form
+# 3. Check your email
+# 4. Copy API key to .env file
+```
+
+### 3. EmailJS (5 minutes)
+```bash
+# Visit: https://www.emailjs.com/
+# 1. Sign up for free
+# 2. Add email service (Gmail recommended)
+# 3. Create an email template
+# 4. Get your keys from dashboard
+# 5. Copy keys to .env file
+```
+
+## Development Mode (No API Keys Required)
+
+If you just want to test the application locally, it works with simulated data when API keys are missing:
+
+```bash
+cp .env.example .env
+# Edit .env and remove all API key values
+docker-compose up -d
+```
+
+The application will:
+- Use simulated weather data
+- Show map without geocoding
+- Log emails to console instead of sending
+- Use static market price data
+
+Perfect for development and testing! 🚀
 
 ## 🏗️ Project Structure
 
