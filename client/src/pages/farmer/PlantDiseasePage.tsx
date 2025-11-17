@@ -1,5 +1,38 @@
-import React, { useState, useRef } from 'react';
-import { Upload, Camera, AlertCircle, CheckCircle, Info, Loader2, Brain, Target } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useAuthStore } from '@/store/authStore';
+import {
+  Upload,
+  Camera,
+  AlertCircle,
+  CheckCircle,
+  Info,
+  Loader2,
+  Brain,
+  Target,
+  Microscope,
+  Zap,
+  Heart,
+  Star,
+  Clock,
+  History,
+  Settings,
+  RefreshCw,
+  Download,
+  Share2,
+  ZoomIn,
+  Image as ImageIcon,
+  X,
+  ChevronRight,
+  Sparkles,
+  Shield,
+  Bug,
+  Droplets,
+  Sun,
+  Leaf,
+  TreePine,
+  Flower,
+  Apple
+} from 'lucide-react';
 import { api } from '@/services/api';
 import toast from 'react-hot-toast';
 
