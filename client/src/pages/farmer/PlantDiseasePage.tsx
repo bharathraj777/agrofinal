@@ -220,122 +220,164 @@ const PlantDiseasePage: React.FC = () => {
         </div>
 
       {/* Model Selection */}
-      {availableModels.length > 0 && (
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-            <Brain className="w-5 h-5 mr-2 text-primary-600" />
-            Detection Model
-          </h3>
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+          <div className="p-6 border-b border-gray-100">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-gray-900 flex items-center">
+                <Brain className="w-6 h-6 mr-3 text-blue-600" />
+                AI Detection Models
+              </h3>
+              <button className="p-2 text-gray-400 hover:text-gray-600">
+                <Settings className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Select Model
-              </label>
-              <select
-                value={selectedModel}
-                onChange={(e) => setSelectedModel(e.target.value)}
-                className="input"
-              >
-                <option value="auto">Auto (Recommended)</option>
-                {availableModels.map((model, index) => (
-                  <option key={index} value={model.name}>
-                    {model.name} ({(model.accuracy * 100).toFixed(1)}% accuracy)
-                  </option>
-                ))}
-              </select>
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <div className="col-span-full">
+                <label className="block text-sm font-medium text-gray-700 mb-3">Select Detection Model</label>
+                <select
+                  value={selectedModel}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                >
+                  <option value="auto">🤖 Auto (Recommended)</option>
+                  {availableModels.map((model, index) => (
+                    <option key={index} value={model.name}>
+                      🧠 {model.name} ({(model.accuracy * 100).toFixed(1)}% accuracy)
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {modelInfo && (
-              <div className="md:col-span-2">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="text-sm text-blue-800">
-                    <strong>Current Model:</strong> {modelInfo.name}
-                  </p>
-                  <p className="text-sm text-blue-700 mt-1">
-                    <strong>Architecture:</strong> {modelInfo.architecture}
-                  </p>
-                  <p className="text-sm text-blue-700">
-                    <strong>Description:</strong> {modelInfo.description}
-                  </p>
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
+                <div className="flex items-start space-x-3">
+                  <div className="p-3 bg-blue-100 rounded-lg">
+                    <Brain className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-blue-900 text-lg mb-2">{modelInfo.name}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="text-blue-700">Architecture:</span>
+                        <span className="font-medium text-blue-900 ml-1">{modelInfo.architecture}</span>
+                      </div>
+                      <div>
+                        <span className="text-blue-700">Accuracy:</span>
+                        <span className="font-medium text-blue-900 ml-1">{(model.accuracy * 100).toFixed(1)}%</span>
+                      </div>
+                      <div>
+                        <span className="text-blue-700">Classes:</span>
+                        <span className="font-medium text-blue-900 ml-1">{modelInfo.classes?.length || 0}</span>
+                      </div>
+                    </div>
+                    <p className="text-blue-800 mt-3">{modelInfo.description}</p>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
-      )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Upload Section */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Upload Plant Image</h2>
-
-          <div
-            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-              selectedFile ? 'border-primary-500 bg-primary-50' : 'border-gray-300 hover:border-gray-400'
-            }`}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-          >
-            {previewUrl ? (
-              <div className="space-y-4">
-                <img
-                  src={previewUrl}
-                  alt="Plant for analysis"
-                  className="mx-auto max-h-64 rounded-lg shadow"
-                />
-                <div className="flex items-center justify-center space-x-4">
-                  <button
-                    onClick={resetAnalysis}
-                    className="btn-outline"
-                  >
-                    Upload Different Image
-                  </button>
-                  <button
-                    onClick={analyzeImage}
-                    disabled={isAnalyzing}
-                    className="btn-primary"
-                  >
-                    {isAnalyzing ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Analyzing...
-                      </>
-                    ) : (
-                      'Analyze Disease'
-                    )}
-                  </button>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Upload Section */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="p-6 border-b border-gray-100">
+                <h2 className="text-xl font-bold text-gray-900">Upload Plant Image</h2>
               </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Upload className="w-8 h-8 text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-lg font-medium text-gray-900">Drop your image here</p>
-                  <p className="text-sm text-gray-500">or click to browse</p>
-                </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                />
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="btn-primary"
+
+              <div className="p-6">
+                <div
+                  className={`relative border-3 border-dashed rounded-2xl p-8 text-center transition-all duration-300 ${
+                    selectedFile
+                      ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50'
+                      : 'border-gray-300 hover:border-gray-400 bg-gray-50 hover:bg-gray-100'
+                  }`}
+                  onDrop={handleDrop}
+                  onDragOver={handleDragOver}
                 >
-                  Select Image
-                </button>
-                <div className="text-xs text-gray-500">
-                  Supports: JPG, PNG, GIF, WebP (Max 5MB)
+                  {previewUrl ? (
+                    <div className="space-y-6">
+                      <div className="relative">
+                        <img
+                          src={previewUrl}
+                          alt="Plant for analysis"
+                          className="mx-auto max-h-80 rounded-xl shadow-lg object-cover"
+                        />
+                        <button
+                          onClick={() => setPreviewUrl('')}
+                          className="absolute top-2 right-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg hover:bg-white transition-colors"
+                        >
+                          <X className="w-4 h-4 text-gray-600" />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button
+                          onClick={resetAnalysis}
+                          className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                        >
+                          <Upload className="w-4 h-4" />
+                          Choose Different Image
+                        </button>
+                        <button
+                          onClick={analyzeImage}
+                          disabled={isAnalyzing}
+                          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isAnalyzing ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              Analyzing...
+                            </>
+                          ) : (
+                            <>
+                              <Microscope className="w-4 h-4" />
+                              Analyze Disease
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      <div className="mx-auto w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center">
+                        <ImageIcon className="w-10 h-10 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xl font-semibold text-gray-900 mb-2">Drop your plant image here</p>
+                        <p className="text-gray-600">or click to browse from your device</p>
+                      </div>
+                      <div className="flex flex-col items-center space-y-3">
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileSelect}
+                          className="hidden"
+                        />
+                        <button
+                          onClick={() => fileInputRef.current?.click()}
+                          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
+                        >
+                          <Camera className="w-4 h-4" />
+                          Select Image
+                        </button>
+                        <div className="text-xs text-gray-500 text-center">
+                          <p>Supports: JPG, PNG, GIF, WebP</p>
+                          <p>Maximum file size: 5MB</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            )}
+            </div>
           </div>
-        </div>
 
         {/* Results Section */}
         <div className="space-y-6">
