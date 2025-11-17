@@ -379,131 +379,102 @@ const PlantDiseasePage: React.FC = () => {
             </div>
           </div>
 
-        {/* Results Section */}
-        <div className="space-y-6">
-          {/* Instructions */}
-          {!prediction && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                <Target className="w-5 h-5 mr-2 text-primary-600" />
-                How to Get Best Results
-              </h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">•</span>
-                  Take clear photos in good lighting
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">•</span>
-                  Include both affected and healthy areas
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">•</span>
-                  Use natural lighting when possible
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">•</span>
-                  Focus on specific symptoms or patterns
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-600 mr-2">•</span>
-                  Capture leaf details and any visible damage
-                </li>
-              </ul>
-            </div>
-          )}
-
-          {/* Prediction Results */}
-          {prediction && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Results</h3>
-
-              {/* Disease Info */}
-              <div className="mb-6 p-4 border border-gray-200 rounded-lg">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center">
-                    {getSeverityIcon(prediction.severity)}
-                    <span className="ml-2 text-lg font-medium text-gray-900">
-                      {prediction.disease}
-                    </span>
+                  {/* Instructions & Quick Actions */}
+          <div className="space-y-6">
+            {/* Photography Tips */}
+            {!prediction && (
+              <div className="bg-gradient-to-br from-emerald-50 to-green-100 border border-emerald-200 rounded-2xl p-6">
+                <div className="flex items-start space-x-3">
+                  <div className="p-3 bg-emerald-200 rounded-xl">
+                    <Target className="w-6 h-6 text-emerald-700" />
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getSeverityColor(prediction.severity)}`}>
-                    {prediction.severity.toUpperCase()}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Confidence</span>
-                  <span className={`font-medium ${getConfidenceColor(prediction.confidence)}`}>
-                    {(prediction.confidence * 100).toFixed(1)}%
-                  </span>
-                </div>
-              </div>
-
-              {/* Recommendations */}
-              {prediction.recommendations.length > 0 && (
-                <div className="mb-6">
-                  <h4 className="font-medium text-gray-900 mb-2">Recommendations</h4>
-                  <ul className="space-y-1 text-sm text-gray-600">
-                    {prediction.recommendations.map((rec, index) => (
-                      <li key={index} className="flex items-start">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        {rec}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Treatments */}
-              <div className="mb-6">
-                <h4 className="font-medium text-gray-900 mb-2">Treatment Options</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h5 className="text-sm font-medium text-green-800 mb-2 bg-green-50 px-2 py-1 rounded">
-                      Organic Methods
-                    </h5>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      {prediction.treatments.organic.map((treatment, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-green-600 mr-2">•</span>
-                          {treatment}
-                        </li>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-emerald-900 text-lg mb-3">How to Get Best Results</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[
+                        'Take clear photos in bright, natural lighting',
+                        'Include both affected and healthy areas for comparison',
+                        'Focus on specific symptoms, spots, or patterns',
+                        'Capture leaf details, stems, and any visible damage',
+                        'Use clean background to avoid distractions',
+                        'Take multiple angles if symptoms are spread out'
+                      ].map((tip, index) => (
+                        <div key={index} className="flex items-start">
+                          <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3 mt-1.5"></div>
+                          <span className="text-emerald-800 text-sm">{tip}</span>
+                        </div>
                       ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-medium text-blue-800 mb-2 bg-blue-50 px-2 py-1 rounded">
-                      Chemical Methods
-                    </h5>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      {prediction.treatments.chemical.map((treatment, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-blue-600 mr-2">•</span>
-                          {treatment}
-                        </li>
-                      ))}
-                    </ul>
+                    </div>
                   </div>
                 </div>
               </div>
+            )}
+          </div>
 
-              {/* Prevention */}
-              {prediction.prevention.length > 0 && (
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Prevention Tips</h4>
-                  <ul className="space-y-1 text-sm text-gray-600">
-                    {prediction.prevention.map((tip, index) => (
-                      <li key={index} className="flex items-start">
-                        <Info className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                        {tip}
-                      </li>
-                    ))}
-                  </ul>
+          {/* Quick Actions Sidebar */}
+          <div className="space-y-6">
+            {/* Recent Analyses */}
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="p-6 border-b border-gray-100">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                  <History className="w-5 h-5 mr-2 text-blue-600" />
+                  Recent Analyses
+                </h3>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  {history.length > 0 ? (
+                    history.slice(0, 3).map((item, index) => (
+                      <div key={index} className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">{item.disease}</p>
+                            <p className="text-xs text-gray-500">{new Date().toLocaleDateString()}</p>
+                          </div>
+                          <span className={`text-xs font-medium px-2 py-1 rounded-full ${getSeverityColor(item.severity)}`}>
+                            {item.severity}
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <Bug className="w-8 h-8 text-gray-300 mx-auto mb-3" />
+                      <p className="text-gray-500 text-sm">No previous analyses yet</p>
+                      <p className="text-gray-400 text-xs mt-1">Upload your first plant image to get started</p>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
-          )}
+
+            {/* Quick Tips */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-3 bg-blue-200 rounded-xl">
+                  <Sparkles className="w-6 h-6 text-blue-700" />
+                </div>
+                <h3 className="font-bold text-blue-900 text-lg">Quick Tips</h3>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { icon: Sun, text: 'Best photos taken in morning light', color: 'text-amber-600' },
+                  { icon: Droplets, text: 'Avoid wet leaves for clear shots', color: 'text-blue-600' },
+                  { icon: Leaf, text: 'Include healthy leaves for comparison', color: 'text-green-600' }
+                ].map((tip, index) => {
+                  const Icon = tip.icon;
+                  return (
+                    <div key={index} className="flex items-start space-x-3">
+                      <div className={`p-2 bg-blue-100 rounded-lg ${tip.color}`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span className="text-blue-800 text-sm">{tip.text}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
