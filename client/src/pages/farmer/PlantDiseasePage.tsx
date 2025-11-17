@@ -59,6 +59,7 @@ interface ModelInfo {
 }
 
 const PlantDiseasePage: React.FC = () => {
+  const { user } = useAuthStore();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -66,6 +67,7 @@ const PlantDiseasePage: React.FC = () => {
   const [availableModels, setAvailableModels] = useState<ModelInfo[]>([]);
   const [selectedModel, setSelectedModel] = useState('auto');
   const [modelInfo, setModelInfo] = useState<ModelInfo | null>(null);
+  const [history, setHistory] = useState<DiseasePrediction[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
