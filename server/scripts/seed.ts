@@ -418,9 +418,9 @@ const seedData = async () => {
     console.log('💰 Creating price data...');
     const priceData = [];
     const states = ['Maharashtra', 'Gujarat', 'Punjab', 'Haryana', 'Madhya Pradesh'];
-    const crops = ['Rice', 'Wheat', 'Maize', 'Cotton', 'Sugarcane'];
+    const cropNames = ['Rice', 'Wheat', 'Maize', 'Cotton', 'Sugarcane'];
 
-    for (let cropName of crops) {
+    for (let cropName of cropNames) {
       const crop = createdCrops.find(c => c.name === cropName);
       if (!crop) continue;
 
